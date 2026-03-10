@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next-Leg Smart Carryover Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-bg"></div>
+  <main class="prototype-shell">
+    <header class="topbar">
+      <div>
+        <p class="logo-wordmark">eDreams ODIGEO</p>
+        <h1>Small improvement Prototype: Next-Leg Smart Carryover</h1>
+        <p class="subtitle">Auto-apply with explicit undo to maximize convenience and maintain trust.</p>
+      </div>
+      <div class="topbar-links">
+        <a class="back-link" id="back-to-overview" href="./index-full.html">Back to overview</a>
+        <a class="back-link" href="./PM-Business-Case.md">View markdown source</a>
+      </div>
+    </header>
+
+    <section class="panel" style="margin-bottom:1rem;">
+      <div class="panel-header">
+        <h2>Design Notes for Engineering and UX</h2>
+      </div>
+      <div class="preview-body">
+        <ul class="kpi-list">
+          <li>Auto-apply is paired with clear undo to balance convenience and trust.</li>
+          <li>Fallback mapping state is explicit to prevent confusion and hidden changes.</li>
+          <li>Mobile keeps all critical actions above the fold to reduce drop-off.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <article class="panel">
+        <div class="panel-header">
+          <h2>Desktop Next-Leg Mock</h2>
+          <p class="chip">Auto-apply + undo</p>
+        </div>
+        <div class="preview-body">
+          <div class="recommendation">
+            <p class="chip">Copied from first leg - edit anytime</p>
+            <h3>Next-leg options applied</h3>
+            <ul class="list">
+              <li>Seat: Standard row 14</li>
+              <li>Baggage: 20kg checked bag</li>
+            </ul>
+            <div class="meta">
+              <span>Edit anytime</span>
+              <span>Equivalent mapping: exact</span>
+              <span>Applies to return and multi-leg itineraries</span>
+            </div>
+            <div class="actions">
+              <button class="btn btn-primary">Keep options</button>
+              <button class="btn btn-secondary">Edit selection</button>
+              <button class="btn btn-secondary">Remove</button>
+            </div>
+          </div>
+
+          <div class="state-card">
+            <h4>Alternative pattern: user-confirm carryover</h4>
+            <p>Show "Use outbound choices" button before any auto-application. Lower trust risk, but slower flow.</p>
+          </div>
+
+          <div class="state-card state-fallback">
+            <h4>Fallback mapping state</h4>
+            <p>Exact seat unavailable. Closest option selected: row 15 aisle. User can edit before payment.</p>
+          </div>
+
+          <div class="summary">
+            <p><strong>Behavioral checkpoints</strong></p>
+            <p>Expected attach impact: <span class="status-ok">Positive</span></p>
+            <p>Trust risk monitor: <span class="status-watch">Watch support contacts</span></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <h2>Mobile Next-Leg Mock</h2>
+          <p class="chip">One-screen clarity</p>
+        </div>
+        <div class="preview-body">
+          <div class="mobile-frame">
+            <div class="mobile-top">Next-leg flight options</div>
+            <div class="mobile-content">
+              <p class="chip">Copied from first leg</p>
+              <h3>Seat and bag ready</h3>
+              <ul class="list">
+                <li>Seat: Standard row 14</li>
+                <li>Bag: 20kg</li>
+              </ul>
+              <p>If exact option is unavailable, we select the closest match and highlight it.</p>
+              <div class="actions">
+                <button class="btn btn-primary">Keep</button>
+                <button class="btn btn-secondary">Edit</button>
+              </div>
+              <div class="summary">
+                <p>Status: <span class="status-ok">No extra step required</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+<script>
+  (function () {
+    const backLink = document.getElementById('back-to-overview');
+    if (!backLink) return;
+
+    const fallback = './index-full.html';
+    const referrer = document.referrer || '';
+
+    if (referrer) {
+      try {
+        const refUrl = new URL(referrer);
+        const sameOrigin = refUrl.origin === window.location.origin;
+        const samePage = refUrl.pathname === window.location.pathname;
+        if (sameOrigin && !samePage) {
+          backLink.href = refUrl.pathname + refUrl.search + refUrl.hash;
+          return;
+        }
+      } catch {
+        // Keep fallback when referrer is not a valid URL.
+      }
+    }
+
+    backLink.href = fallback;
+  })();
+</script>
+</html>

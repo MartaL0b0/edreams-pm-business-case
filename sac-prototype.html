@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Ancillary Concierge Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-bg"></div>
+  <main class="prototype-shell">
+    <header class="topbar">
+      <div>
+        <p class="logo-wordmark">eDreams ODIGEO</p>
+        <h1>Strategic feature Prototype: Smart Ancillary Concierge</h1>
+        <p class="subtitle">Recommendation module with explainable logic and editable one-tap apply.</p>
+      </div>
+      <div class="topbar-links">
+        <a class="back-link" id="back-to-overview" href="./index-full.html">Back to overview</a>
+        <a class="back-link" href="./PM-Business-Case.md">View markdown source</a>
+      </div>
+    </header>
+
+    <section class="panel" style="margin-bottom:1rem;">
+      <div class="panel-header">
+        <h2>Design Notes for Engineering and UX</h2>
+      </div>
+      <div class="preview-body">
+        <ul class="kpi-list">
+          <li>Primary CTA is visually dominant to reduce decision friction.</li>
+          <li>Explainability chips make recommendation logic transparent and trustable.</li>
+          <li>Low-confidence and fallback states are explicitly designed to preserve conversion.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <article class="panel">
+        <div class="panel-header">
+          <h2>Desktop Checkout Mock</h2>
+          <p class="chip">Primary state</p>
+        </div>
+        <div class="preview-body">
+          <div class="recommendation">
+            <p class="chip">Recommended for your trip</p>
+            <h3>Family Comfort Bundle</h3>
+            <ul class="list">
+              <li>2 checked bags (20kg)</li>
+              <li>Seats together in standard zone</li>
+            </ul>
+            <div class="meta">
+              <span>7-day trip</span>
+              <span>2 travelers</span>
+              <span>Mild weather</span>
+              <span>Why this: trip length + party size</span>
+            </div>
+            <div class="actions">
+              <button class="btn btn-primary">Apply recommendation</button>
+              <button class="btn btn-secondary">Customize</button>
+            </div>
+          </div>
+
+          <div class="state-card state-low">
+            <h4>Low-confidence state</h4>
+            <p>We are less certain about a full bundle. Showing conservative option: 1 cabin bag + standard seat.</p>
+          </div>
+
+          <div class="state-card state-fallback">
+            <h4>Fallback state</h4>
+            <p>Recommendations unavailable. Showing standard seat and baggage selection flow.</p>
+          </div>
+
+          <div class="summary">
+            <p><strong>Order summary</strong></p>
+            <p>Flight total: EUR 289.00</p>
+            <p>Ancillaries (selected): EUR 54.00</p>
+            <p><strong>Trip total: EUR 343.00</strong></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-header">
+          <h2>Mobile Checkout Mock</h2>
+          <p class="chip">Responsive</p>
+        </div>
+        <div class="preview-body">
+          <div class="mobile-frame">
+            <div class="mobile-top">Seat and Baggage</div>
+            <div class="mobile-content">
+              <p class="chip">Recommended</p>
+              <h3>Family Comfort Bundle</h3>
+              <ul class="list">
+                <li>2 checked bags</li>
+                <li>Seats together</li>
+              </ul>
+              <div class="meta">
+                <span>7 days</span>
+                <span>2 travelers</span>
+              </div>
+              <div class="actions">
+                <button class="btn btn-primary">Apply</button>
+                <button class="btn btn-secondary">Edit</button>
+              </div>
+              <div class="summary">
+                <p><strong>Why this?</strong> Longer trip + party travel.</p>
+                <p>Status: <span class="status-ok">Ready to continue</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+<script>
+  (function () {
+    const backLink = document.getElementById('back-to-overview');
+    if (!backLink) return;
+
+    const fallback = './index-full.html';
+    const referrer = document.referrer || '';
+
+    if (referrer) {
+      try {
+        const refUrl = new URL(referrer);
+        const sameOrigin = refUrl.origin === window.location.origin;
+        const samePage = refUrl.pathname === window.location.pathname;
+        if (sameOrigin && !samePage) {
+          backLink.href = refUrl.pathname + refUrl.search + refUrl.hash;
+          return;
+        }
+      } catch {
+        // Keep fallback when referrer is not a valid URL.
+      }
+    }
+
+    backLink.href = fallback;
+  })();
+</script>
+</html>

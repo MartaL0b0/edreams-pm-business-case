@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>eDreams Ancillary Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-bg"></div>
+  <main class="deck-shell">
+    <header class="deck-header">
+      <div>
+        <p class="logo-wordmark">eDreams ODIGEO</p>
+        <h1 id="page-title"></h1>
+        <p class="subtitle" id="page-subtitle"></p>
+        <div class="deck-links" aria-label="Prototype and source links">
+          <a class="back-link" href="./sac-prototype.html">Open SAC Prototype</a>
+          <a class="back-link" href="./carryover-prototype.html">Open Next-Leg Prototype</a>
+          <a class="back-link" href="./PM-Business-Case.md">Open Business Case Markdown</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="deck-layout">
+      <nav class="tab-bar" role="tablist" aria-label="Full presentation sections">
+        <p class="tab-title">Table of Contents</p>
+        <div id="dynamic-tab-list"></div>
+      </nav>
+
+      <section class="tab-panels">
+        <div class="fold-toolbar">
+          <button type="button" class="btn btn-secondary" id="toggle-all-folds" aria-label="Expand or collapse all sections">Collapse all</button>
+        </div>
+        <div id="dynamic-tab-panels"></div>
+      </section>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="./index-full-loader.js"></script>
+  <script src="./tabs.js"></script>
+</body>
+</html>
